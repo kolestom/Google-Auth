@@ -1,22 +1,32 @@
-import axios from "axios";
+// import axios from "axios";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import sendCode from "../util/sendCode";
 
 const CallbackPage = () => {
-    const urlSearchParams = new URLSearchParams(window.location.search)
-    const code = urlSearchParams.get("code")
-    console.log(code);
+    const navigate = useNavigate()
 
-    const getToken = async() => {
-        const resp = await axios.post('http://localhost:3333/api/gettoken', {
-            code
-        })
-        console.log(resp.data);
-    }
+    useEffect(() => {
+        
+        const urlSearchParams = new URLSearchParams(window.location.search)
+        const code = urlSearchParams.get("code")
+        console.log(code);
+        
+        const init = async () =>{
+
+            const data = await sendCode(code)
+            console.log(data);
+            localStorage.setItem("name", JSON.stringify(data.name))
+            localStorage.setItem("token", JSON.stringify(data.token))
+            navigate('/home')
+        }
+        init()
+    }, []);
 
     
     return ( 
         <>
             <h2>Callback Page</h2>
-            <button onClick={getToken}>Get Access token</button>
         </>
      );
 }

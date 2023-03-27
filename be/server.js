@@ -5,15 +5,14 @@ const mongoose = require('mongoose')
 const port = 3333
 const wordRoute = require('./routes/words')
 const loginRoute = require('./routes/login')
-const tokenRoute = require('./routes/getToken')
+// const authMW = require('./middleware/authMW')
 
 
 app.use(cors())
 app.use(express.json())
+// app.use(authMW)
 app.use('/api/words', wordRoute)
 app.use('/api/login', loginRoute)
-app.use('/api/gettoken', tokenRoute)
-
 
 
 mongoose.set('strictQuery', false)

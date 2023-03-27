@@ -4,6 +4,7 @@ import './App.css'
 import RootLayout from './pages/RootLayout'
 import LoginPage from './pages/LoginPage'
 import CallbackPage from './pages/CallbackPage'
+import HomePage from './pages/HomePage'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: 'callback',
         element: <CallbackPage/>
+      },
+      {
+        path: 'home',
+        element: <HomePage/>
       }
     ]
   }
